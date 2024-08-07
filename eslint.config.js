@@ -6,10 +6,10 @@ module.exports = [
   prettierConfig,
   {
     files: ['**/*.js'],
-    languageOptions: { sourceType: 'commonjs' },
-  },
-  {
-    languageOptions: { globals: globals.browser },
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: { ...globals.browser },
+    },
   },
   pluginJs.configs.recommended,
 ];
