@@ -8,7 +8,7 @@ module.exports = [
     files: ['**/*.js'],
     languageOptions: {
       sourceType: 'commonjs',
-      globals: { ...globals.browser },
+      globals: { ...globals.node },
     },
   },
   pluginJs.configs.recommended,
