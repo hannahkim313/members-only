@@ -32,6 +32,33 @@ INSERT INTO users (first_name, last_name, username, password, membership_status)
   ('Bob', 'Ross', 'iambobross', 'thebestPAINTERofalltime!', 'guest'),
   ('Secret', 'Member', 'iamasecretmember', 'ilikefruitsandveggies', 'guest'),
   ('Super', 'Member', 'iamanothersecretmember', 'ilikefastfood!', 'guest');
+
+
+CREATE TABLE IF NOT EXISTS messages (
+  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  title TEXT,
+  message TEXT,
+  timestamp TIMESTAMP WITHOUT TIME ZONE,
+  author INTEGER
+);
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE conname = 'messages_author_fkey'
+  ) THEN
+    ALTER TABLE messages
+    ADD CONSTRAINT messages_author_fkey
+    FOREIGN KEY (author) REFERENCES users(id);
+  END IF;
+END $$;
+
+INSERT INTO messages (title, message, timestamp, author) VALUES
+  ('My favorite painting', 'My favorite painting is "Mountain Retreat."', NOW(), 1),
+  ('Seasons', 'This message was written in summer!', NOW(), 2),
+  ('Coding', 'JavaScript is cool.', NOW(), 3);
 `;
 
 async function main() {
