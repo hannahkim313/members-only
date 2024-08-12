@@ -58,7 +58,8 @@ END $$;
 INSERT INTO messages (title, message, timestamp, author) VALUES
   ('My favorite painting', 'My favorite painting is "Mountain Retreat."', NOW(), 1),
   ('Seasons', 'This message was written in summer!', NOW(), 2),
-  ('Coding', 'JavaScript is cool.', NOW(), 3);
+  ('Coding', 'JavaScript is cool.', NOW(), 3),
+  ('Coding', 'Front-end > back-end!', NOW(), 3);
 `;
 
 async function main() {
