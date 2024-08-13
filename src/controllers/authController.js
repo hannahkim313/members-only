@@ -1,5 +1,7 @@
 exports.authSignUpGet = (req, res) => {
-  res.send('not implemented yet');
+  res.render('./views/sign-up', {
+    title: 'Welcome to Members Only | Sign up',
+  });
 };
 
 exports.authSignUpPost = (req, res) => {
