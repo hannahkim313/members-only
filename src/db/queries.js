@@ -42,10 +42,27 @@ const getUsernames = async (username) => {
   }
 };
 
-// TODO: create a new user and insert into the database
+const createUser = async ({
+  firstName,
+  lastName,
+  username,
+  password,
+  membershipStatus,
+}) => {
+  try {
+    await pool.query(
+      'INSERT INTO users (first_name, last_name, username, password, membership_status) VALUES ($1, $2, $3, $4, $5)',
+      [firstName, lastName, username, password, membershipStatus],
+    );
+  } catch (err) {
+    console.error('Error adding user into database:', err);
+    throw new Error('DB_INSERT_INTO_ERROR');
+  }
+};
 
 module.exports = {
   getPartialMessageDetails,
   getFullMessageDetails,
   getUsernames,
+  createUser,
 };

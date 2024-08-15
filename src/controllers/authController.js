@@ -1,6 +1,8 @@
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const validateSignUp = require('../validators/signUpValidators');
+const { createUser } = require('../db/queries');
 
 exports.authSignUpGet = asyncHandler(async (req, res) => {
   res.render('./views/signUp', {
@@ -33,7 +35,18 @@ exports.authSignUpPost = [
         },
       });
     }
-    // TODO: insert values into db (use bcrypt for password)
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    await createUser({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      username: req.body.username,
+      password: hashedPassword,
+      membershipStatus: 'guest',
+    });
+
+    res.redirect('/');
   }),
 ];
 
