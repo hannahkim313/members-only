@@ -29,9 +29,9 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 INSERT INTO users (first_name, last_name, username, password, membership_status) VALUES
-  ('Bob', 'Ross', 'iambobross', 'thebestPAINTERofalltime!', 'guest'),
-  ('Secret', 'Member', 'iamasecretmember', 'ilikefruitsandveggies', 'guest'),
-  ('Super', 'Member', 'iamanothersecretmember', 'ilikefastfood!', 'guest');
+  ('Bob', 'Ross', 'iambobross', '123thebestPAINTERofalltime!', 'guest'),
+  ('Secret', 'Member', 'iamasecretmember', 'iLOVEfruitsandveggies100!', 'guest'),
+  ('Super', 'Member', 'iamanothersecretmember', 'iLIKEfastfood50!', 'guest');
 
 
 CREATE TABLE IF NOT EXISTS messages (
