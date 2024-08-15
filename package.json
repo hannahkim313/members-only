@@ -6,7 +6,10 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "populate": "node src/db/populatedb.js"
+    "populate": "node src/db/populatedb.js",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "debug:watch": "nodemon --inspect --watch 'src/**/*.js' src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,8 @@
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.18.0",
+    "express-validator": "^7.2.0",
+    "nodemon": "^3.1.4",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.12.0"
