@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1>Create an Account</h1>
+    <% if (errors.length > 0) { %>
+    <h2>Errors</h2>
+    <% } %>
+    <%- include('./partials/errors.ejs') %>
+    <form action="/auth/sign-up" method="post">
+      <label for="firstName">First name:</label>
+      <input
+        type="text"
+        name="firstName"
+        id="firstName"
+        value="<%= user.firstName === undefined ? '' : user.firstName %>"
+      />
+      <label for="lastName">Last name:</label>
+      <input
+        type="text"
+        name="lastName"
+        id="lastName"
+        value="<%= user.lastName === undefined ? '' : user.lastName %>"
+      />
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        value="<%= user.username === undefined ? '' : user.username %>"
+      />
+      <label for="password">Password:</label>
+      <input
+        type="text"
+        name="password"
+        id="password"
+        value="<%= user.password === undefined ? '' : user.password %>"
+      />
+      <label for="confirmPassword">Confirm password:</label>
+      <input
+        type="text"
+        name="confirmPassword"
+        id="confirmPassword"
+        value="<%= user.confirmPassword === undefined ? '' : user.confirmPassword %>"
+      />
+      <button type="submit">Sign up</button>
+      <p>Already have an account?</p>
+      <a href="/login">Log in</a>
+    </form>
+  </body>
+</html>
