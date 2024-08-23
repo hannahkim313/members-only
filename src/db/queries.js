@@ -29,7 +29,7 @@ const getFullMessageDetails = async () => {
 const getUsername = async (username) => {
   try {
     const { rows } = await pool.query(
-      'SELECT COUNT(*) FROM users WHERE username = $1',
+      'SELECT username FROM users WHERE username = $1',
       [username],
     );
 
