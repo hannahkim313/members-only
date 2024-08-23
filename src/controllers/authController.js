@@ -46,14 +46,23 @@ exports.authSignUpPost = [
       membershipStatus: 'guest',
     });
 
-    res.redirect('/');
+    res.redirect('/auth/login');
   }),
 ];
 
 exports.authLoginGet = (req, res) => {
-  res.send('not implemented yet');
+  res.render('./views/login', {
+    title: 'Welcome to Members Only | Log in',
+    error: req.flash('error'),
+  });
 };
 
-exports.authLoginPost = (req, res) => {
-  res.send('not implemented yet');
+exports.authLogoutGet = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.redirect('/');
+  });
 };

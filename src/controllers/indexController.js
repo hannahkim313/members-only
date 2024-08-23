@@ -7,5 +7,6 @@ exports.homeGet = asyncHandler(async (req, res) => {
   res.render('./views/index', {
     title: 'Members Only | Home',
     messages,
+    user: req.user,
   });
 });
