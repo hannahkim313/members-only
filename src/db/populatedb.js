@@ -55,7 +55,7 @@ const main = async () => {
       title TEXT,
       message TEXT,
       timestamp TIMESTAMP WITHOUT TIME ZONE,
-      author_id INTEGER
+      user_id INTEGER
     );
 
     DO $$
@@ -63,15 +63,15 @@ const main = async () => {
       IF NOT EXISTS (
         SELECT 1
         FROM pg_constraint
-        WHERE conname = 'messages_author_fkey'
+        WHERE conname = 'messages_user_id_fkey'
       ) THEN
         ALTER TABLE messages
-        ADD CONSTRAINT messages_author_fkey
-        FOREIGN KEY (author) REFERENCES users(id);
+        ADD CONSTRAINT messages_user_id_fkey
+        FOREIGN KEY (user_id) REFERENCES users(id);
       END IF;
     END $$;
 
-    INSERT INTO messages (title, message, timestamp, author) VALUES
+    INSERT INTO messages (title, message, timestamp, user_id) VALUES
       ('My favorite painting', 'My favorite painting is "Mountain Retreat."', NOW(), 1),
       ('Seasons', 'This message was written in summer!', NOW(), 2),
       ('Coding', 'JavaScript is cool.', NOW(), 3),

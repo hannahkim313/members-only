@@ -16,7 +16,7 @@ const getFullMessageDetails = async () => {
     const { rows } = await pool.query(`
       SELECT m.title, m.message, m.timestamp, CONCAT(u.first_name, ' ', u.last_name) AS full_name
       FROM messages AS m
-      JOIN users AS u ON m.author_id = u.id;
+      JOIN users AS u ON m.user_id = u.id;
     `);
 
     return rows;
@@ -88,11 +88,11 @@ const updateUser = async ({ membershipStatus }, { req }) => {
   }
 };
 
-const createMessage = async ({ title, message, timestamp, authorId }) => {
+const createMessage = async ({ title, message, timestamp, userId }) => {
   try {
     await pool.query(
-      'INSERT INTO messages (title, message, timestamp, author_id) VALUES ($1, $2, $3, $4)',
-      [title, message, timestamp, authorId],
+      'INSERT INTO messages (title, message, timestamp, user_id) VALUES ($1, $2, $3, $4)',
+      [title, message, timestamp, userId],
     );
   } catch (err) {
     console.error('Error adding message into database:', err);

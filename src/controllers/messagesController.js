@@ -30,7 +30,7 @@ exports.messagesCreatePost = [
       title: req.body.title,
       message: req.body.text,
       timestamp: new Date(),
-      authorId: req.user.id,
+      userId: req.user.id,
     });
 
     res.redirect('/');

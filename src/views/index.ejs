@@ -12,7 +12,6 @@
       Welcome back,
       <%= user.first_name %>!
     </h2>
-    <!-- TODO: display links to message routes based on membership status -->
     <% if (user.membership_status !== 'guest') { %>
     <a href="/messages/create">Create a message</a>
     <% } %>
@@ -34,6 +33,7 @@
       <p><%= message.full_name %></p>
       <h4>Date Posted</h4>
       <p><%= message.timestamp %></p>
+      <!-- TODO: add delete message feature for admins only -->
     </article>
     <% if (index < messages.length - 1) { %>
     <hr />
