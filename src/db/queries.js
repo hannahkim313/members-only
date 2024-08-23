@@ -88,6 +88,18 @@ const updateUser = async ({ membershipStatus }, { req }) => {
   }
 };
 
+const createMessage = async ({ title, message, timestamp, authorId }) => {
+  try {
+    await pool.query(
+      'INSERT INTO messages (title, message, timestamp, author_id) VALUES ($1, $2, $3, $4)',
+      [title, message, timestamp, authorId],
+    );
+  } catch (err) {
+    console.error('Error adding message into database:', err);
+    throw new Error('DB_INSERT_INTO_ERROR');
+  }
+};
+
 module.exports = {
   getPartialMessageDetails,
   getFullMessageDetails,
@@ -95,4 +107,5 @@ module.exports = {
   getLoginCredentials,
   createUser,
   updateUser,
+  createMessage,
 };

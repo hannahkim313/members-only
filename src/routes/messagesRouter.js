@@ -4,7 +4,7 @@ const messagesController = require('../controllers/messagesController');
 const messagesRouter = Router();
 
 messagesRouter.get('/create', messagesController.messagesCreateGet);
-messagesRouter.post('/create', messagesController.messagesCreateGet);
+messagesRouter.post('/create', messagesController.messagesCreatePost);
 messagesRouter.get('/delete/:id', messagesController.messagesDeleteGet);
 
 module.exports = messagesRouter;
