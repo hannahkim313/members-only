@@ -12,8 +12,14 @@
       Welcome back,
       <%= user.first_name %>!
     </h2>
+    <!-- TODO: display links to message routes based on membership status -->
+    <a href="/member/membership">Change membership</a>
     <a href="/auth/logout">Log out</a>
-    <!-- TODO: display links to change membership status -->
+    <h3>Account Details</h3>
+    <p>First name: <%= user.first_name %></p>
+    <p>Last name: <%= user.last_name %></p>
+    <p>Username: <%= user.username %></p>
+    <p>Membership status: <%= user.membership_status %></p>
     <h3>Messages</h3>
     <% messages.forEach((message, index) => { %>
     <article>
@@ -30,7 +36,6 @@
     <hr />
     <% } %>
     <% }) %>
-    <!-- TODO: display links to message routes based on membership status -->
     <% } else { %>
     <h2>Welcome anonymous visitor!</h2>
     <a href="/auth/sign-up">Sign up</a>

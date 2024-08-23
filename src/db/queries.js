@@ -16,8 +16,8 @@ const getFullMessageDetails = async () => {
     const { rows } = await pool.query(`
       SELECT m.title, m.message, m.timestamp, CONCAT(u.first_name, ' ', u.last_name) AS full_name
       FROM messages AS m
-      JOIN users AS u ON m.author = u.id;
-      `);
+      JOIN users AS u ON m.author_id = u.id;
+    `);
 
     return rows;
   } catch (err) {
@@ -58,9 +58,26 @@ const createUser = async ({
   }
 };
 
+const updateUser = async ({ membershipStatus }, { req }) => {
+  try {
+    await pool.query(
+      `
+      UPDATE users
+      SET membership_status = $1
+      WHERE id = $2
+    `,
+      [membershipStatus, req.user.id],
+    );
+  } catch (err) {
+    console.error('Error updating user into database:', err);
+    throw new Error('DB_UPDATE_ERROR');
+  }
+};
+
 module.exports = {
   getPartialMessageDetails,
   getFullMessageDetails,
   getUsernames,
   createUser,
+  updateUser,
 };

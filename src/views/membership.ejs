@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1>Change Membership</h1>
+    <p>
+      There are three different membership statuses: Guest, Member, and Admin.
+      In order to obtain a specific status, a distinct passcode is required.
+    </p>
+    <% if (errors.length > 0) { %>
+    <h2>Errors</h2>
+    <%- include('./partials/errors.ejs') %>
+    <% } %>
+    <form action="/member/membership" method="post">
+      <label for="passcode">Secret passcode:</label>
+      <input type="text" id="passcode" name="passcode" />
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/">Return home</a>
+  </body>
+</html>

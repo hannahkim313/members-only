@@ -1,3 +1,4 @@
+require('dotenv').config();
 const db = require('../db/queries');
 
 const usernameExists = async (username) => {
@@ -19,7 +20,20 @@ const passwordsMatch = (confirmPassword, { req }) => {
   return confirmPassword === req.body.password;
 };
 
+const isValidPasscode = (passcode) => {
+  if (
+    passcode === process.env.GUEST_PASSCODE ||
+    passcode === process.env.MEMBER_PASSCODE ||
+    passcode === process.env.ADMIN_PASSCODE
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
 module.exports = {
   usernameExists,
   passwordsMatch,
+  isValidPasscode,
 };
