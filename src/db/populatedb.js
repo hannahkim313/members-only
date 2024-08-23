@@ -55,7 +55,7 @@ const main = async () => {
       title TEXT,
       message TEXT,
       timestamp TIMESTAMP WITHOUT TIME ZONE,
-      author INTEGER
+      author_id INTEGER
     );
 
     DO $$
