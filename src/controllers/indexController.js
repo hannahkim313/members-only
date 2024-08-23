@@ -1,8 +1,8 @@
 const asyncHandler = require('express-async-handler');
-const db = require('../db/queries');
+const messageService = require('../services/messageService');
 
 exports.homeGet = asyncHandler(async (req, res) => {
-  const messages = await db.getPartialMessageDetails();
+  const messages = await messageService.getMessages(req.user);
 
   res.render('./views/index', {
     title: 'Members Only | Home',

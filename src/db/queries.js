@@ -11,14 +11,12 @@ const getPartialMessageDetails = async () => {
   }
 };
 
-// TODO: call function when implementing authentication to display full
-// message details to authorized users
 const getFullMessageDetails = async () => {
   try {
     const { rows } = await pool.query(`
       SELECT m.title, m.message, m.timestamp, CONCAT(u.first_name, ' ', u.last_name) AS full_name
       FROM messages AS m
-      JOIN users AS u ON m.author_id = u.id;
+      JOIN users AS u ON m.author = u.id;
       `);
 
     return rows;
