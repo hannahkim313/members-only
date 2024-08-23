@@ -1,7 +1,3 @@
-exports.messagesListGet = (req, res) => {
-  res.send('not implemented yet');
-};
-
 exports.messagesCreateGet = (req, res) => {
   res.send('not implemented yet');
 };
