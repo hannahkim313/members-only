@@ -40,6 +40,20 @@ const getUsername = async (username) => {
   }
 };
 
+const getLoginCredentials = async (username, password) => {
+  try {
+    const { rows } = await pool.query(
+      'SELECT username, password FROM users WHERE username = $1 AND password = $2',
+      [username, password],
+    );
+
+    return rows;
+  } catch (err) {
+    console.error('Error querying database:', err);
+    throw new Error('DB_QUERY_ERROR');
+  }
+};
+
 const createUser = async ({
   firstName,
   lastName,
@@ -78,6 +92,7 @@ module.exports = {
   getPartialMessageDetails,
   getFullMessageDetails,
   getUsername,
+  getLoginCredentials,
   createUser,
   updateUser,
 };
