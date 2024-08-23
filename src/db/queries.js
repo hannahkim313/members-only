@@ -26,7 +26,7 @@ const getFullMessageDetails = async () => {
   }
 };
 
-const getUsernames = async (username) => {
+const getUsername = async (username) => {
   try {
     const { rows } = await pool.query(
       'SELECT COUNT(*) FROM users WHERE username = $1',
@@ -77,7 +77,7 @@ const updateUser = async ({ membershipStatus }, { req }) => {
 module.exports = {
   getPartialMessageDetails,
   getFullMessageDetails,
-  getUsernames,
+  getUsername,
   createUser,
   updateUser,
 };

@@ -3,7 +3,7 @@ const db = require('../db/queries');
 
 const usernameExists = async (username) => {
   try {
-    const usernames = await db.getUsernames(username);
+    const usernames = await db.getUsername(username);
 
     if (parseInt(usernames[0].count, 10) > 0) {
       throw new Error('The username already exists.');
@@ -11,8 +11,12 @@ const usernameExists = async (username) => {
 
     return true;
   } catch (err) {
-    console.error('Error querying database:', err);
-    throw new Error('DB_QUERY_ERROR');
+    if (err.message === 'The username already exists.') {
+      throw err;
+    } else {
+      console.error('Error querying database:', err);
+      throw new Error('DB_QUERY_ERROR');
+    }
   }
 };
 
