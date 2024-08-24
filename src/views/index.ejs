@@ -33,7 +33,10 @@
       <p><%= message.full_name %></p>
       <h4>Date Posted</h4>
       <p><%= message.timestamp %></p>
-      <!-- TODO: add delete message feature for admins only -->
+      <% if (user.membership_status === 'admin') { %>
+      <% console.log(message) %>
+      <a href="/messages/delete/<%= message.id %>">Delete message</a>
+      <% } %>
     </article>
     <% if (index < messages.length - 1) { %>
     <hr />

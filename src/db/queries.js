@@ -2,7 +2,9 @@ const pool = require('./pool');
 
 const getPartialMessageDetails = async () => {
   try {
-    const { rows } = await pool.query('SELECT title, message FROM messages');
+    const { rows } = await pool.query(
+      'SELECT id, title, message FROM messages',
+    );
 
     return rows;
   } catch (err) {
@@ -14,7 +16,7 @@ const getPartialMessageDetails = async () => {
 const getFullMessageDetails = async () => {
   try {
     const { rows } = await pool.query(`
-      SELECT m.title, m.message, m.timestamp, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+      SELECT m.id, m.title, m.message, m.timestamp, CONCAT(u.first_name, ' ', u.last_name) AS full_name
       FROM messages AS m
       JOIN users AS u ON m.user_id = u.id;
     `);
@@ -100,6 +102,15 @@ const createMessage = async ({ title, message, timestamp, userId }) => {
   }
 };
 
+const deleteMessage = async (messageId) => {
+  try {
+    await pool.query('DELETE FROM messages WHERE id = $1', [messageId]);
+  } catch (err) {
+    console.error('Error deleting from database:', err);
+    throw new Error('DB_DELETE_FROM_ERROR');
+  }
+};
+
 module.exports = {
   getPartialMessageDetails,
   getFullMessageDetails,
@@ -108,4 +119,5 @@ module.exports = {
   createUser,
   updateUser,
   createMessage,
+  deleteMessage,
 };

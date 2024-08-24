@@ -38,5 +38,14 @@ exports.messagesCreatePost = [
 ];
 
 exports.messagesDeleteGet = (req, res) => {
-  res.send('not implemented yet');
+  res.render('./views/delete', {
+    title: 'Members Only | Delete Message Confirmation',
+    messageId: req.params.id,
+  });
 };
+
+exports.messagesDeletePost = asyncHandler(async (req, res) => {
+  await db.deleteMessage(req.params.id);
+
+  res.redirect('/');
+});
