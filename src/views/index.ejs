@@ -29,12 +29,13 @@
       <p><%= message.title %></p>
       <h4>Message</h4>
       <p><%= message.message %></p>
+      <% if (user.membership_status !== 'guest') { %>
       <h4>Author</h4>
       <p><%= message.full_name %></p>
       <h4>Date Posted</h4>
       <p><%= message.timestamp %></p>
+      <% } %>
       <% if (user.membership_status === 'admin') { %>
-      <% console.log(message) %>
       <a href="/messages/delete/<%= message.id %>">Delete message</a>
       <% } %>
     </article>
